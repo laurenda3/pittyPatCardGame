@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pitty Pat - 3 Player Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>Pitty Pat</h1>
+
+    <div class="player-zone">
+      <div class="player" id="player2">
+        <h2>Bot 1</h2>
+        <div class="hand"></div>
+      </div>
+
+      <div class="table-zone">
+        <div id="deckCount">Deck: 52</div>
+        <div id="card-zone" class="card"></div>
+        <div class="buttons">
+          <button id="playBtn">Start Game</button>
+          <button id="drawBtn">Draw</button>
+          <button id="undoBtn">Undo</button>
+        </div>
+        <div id="status" class="status-log"></div>
+      </div>
+
+      <div class="player" id="player3">
+        <h2>Bot 2</h2>
+        <div class="hand"></div>
+      </div>
+    </div>
+
+    <div class="player player-bottom" id="player1">
+      <h2>You</h2>
+      <div class="hand"></div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

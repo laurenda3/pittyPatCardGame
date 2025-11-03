@@ -1,0 +1,196 @@
+:root{
+  --bg:#0f2230;
+  --fg:#e9f1f7;
+  --muted:#b6c4cf;
+  --panel:#122a3b;
+  --accent:#4cc2ff;
+  --btn:#2f4354;
+  --shadow:0 10px 24px rgba(0,0,0,.25);
+  --flash:#fff8;
+  --win:#29e37d;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+
+/* Layout: center table small; sides + bottom bigger cards */
+.layout{
+  height:100vh;
+  display:grid;
+  grid-template-columns: 260px minmax(660px,1fr) 260px;
+  /* Top row reduced height by ~75%; bottom row (your hand) gets space */
+  grid-template-rows: 1fr 360px;
+  grid-template-areas:
+    "left table right"
+    "bottom bottom bottom";
+  gap:14px;
+  padding:14px;
+}
+
+.panel{
+  background:var(--panel);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:var(--shadow);
+}
+
+.panel h2{
+  margin:0 0 6px 0;
+  font-weight:600;
+  font-size:16px;
+  text-align:center;
+  opacity:.9;
+}
+
+.left{grid-area:left}
+.right{grid-area:right}
+.bottom{grid-area:bottom}
+.table{
+  grid-area:table;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+  padding:12px;
+}
+
+/* Top info */
+.topbar{width:100%; display:flex; justify-content:center}
+.deck-count{font-size:14px; opacity:.9}
+
+/* SMALL table card area (75% smaller than before) */
+.card-zone{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:120px;   /* was ~260px */
+  margin:2px 0 6px;
+}
+.card-zone .card{
+  width:110px;        /* was ~190px */
+  height:auto;
+  border-radius:10px;
+  box-shadow:var(--shadow);
+}
+
+/* Controls */
+.controls{display:flex; gap:8px; justify-content:center}
+.btn{
+  background:var(--btn);
+  color:var(--fg);
+  padding:9px 14px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+.btn:hover{filter:brightness(1.07)}
+.btn:disabled{opacity:.5; cursor:not-allowed}
+
+/* Log: only latest move; single line / two lines max; no page growth */
+.log{
+  width:100%;
+  max-width:880px;
+  min-height:28px;
+  max-height:40px;
+  padding:6px 10px;
+  background:rgba(255,255,255,0.06);
+  border-radius:10px;
+  font-size:14px;
+  line-height:1.2;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+/* Hands and cards — make everything else bigger */
+.hand{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  min-height:170px;
+}
+.hand.vertical{
+  flex-direction:column;
+  min-height:540px;
+}
+
+.card{
+  width:160px;       /* bigger bottom hand */
+  height:auto;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  transition:transform .08s ease, opacity .08s ease;
+}
+.hand .card:hover{transform:translateY(-5px)}
+
+/* Lane thumbnails — bigger for readability */
+.small{width:60px !important}
+.tiny{width:48px !important}
+
+.lane-title{
+  font-size:12px;
+  color:var(--muted);
+  margin:4px 0 2px;
+  text-align:center;
+}
+.lane{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+  min-height:56px;
+  padding-bottom:8px;
+}
+
+.lanes-row{
+  display:flex;
+  gap:28px;
+  justify-content:center;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+
+/* Flash banner (move / winner) */
+.flash{
+  position:fixed;
+  inset:auto 0 50% 0;
+  transform:translateY(50%);
+  margin:auto;
+  width:fit-content;
+  max-width:90%;
+  background:var(--flash);
+  color:#041018;
+  backdrop-filter: blur(6px);
+  border-radius:14px;
+  padding:10px 16px;
+  font-weight:700;
+  font-size:22px;
+  letter-spacing:.2px;
+  text-align:center;
+  box-shadow:var(--shadow);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.flash.show{opacity:1; transform:translateY(40%)}
+.flash.win{background:linear-gradient(90deg,#fff8,#fff8), radial-gradient(120px 40px at 50% -10%, #fff0, #fff0), #182;
+  color:#dfffe9; border:2px solid var(--win)}
+
+/* Responsive */
+@media (max-width: 1100px){
+  .layout{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "table"
+      "left"
+      "right"
+      "bottom";
+  }
+  .hand.vertical{flex-direction:row; min-height:170px}
+  .card-zone .card{width:100px}
+}

@@ -1,42 +1,90 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pitty Pat - 3 Player Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pitty Pat</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="game-container">
-    <h1>Pitty Pat</h1>
+  <!-- flash banners for moves and winner -->
+  <div id="flash" class="flash" aria-live="polite"></div>
 
-    <div class="player-zone">
-      <div class="player" id="player2">
-        <h2>Bot 1</h2>
-        <div class="hand"></div>
+  <div class="table-grid">
+    <!-- LEFT PLAYER (P2) -->
+    <section class="side left">
+      <div class="mini-lane">
+        <div class="lane-title">Discards</div>
+        <div id="p2-discards" class="lane"></div>
       </div>
 
-      <div class="table-zone">
-        <div id="deckCount">Deck: 52</div>
-        <div id="card-zone" class="card"></div>
-        <div class="buttons">
-          <button id="playBtn">Start Game</button>
-          <button id="drawBtn">Draw</button>
-          <button id="undoBtn">Undo</button>
+      <div class="lane-title">P2</div>
+      <!-- same fan as human, but backs -->
+      <div id="player2" class="hand fan fan-side"></div>
+
+      <div class="mini-lane">
+        <div class="lane-title">Matches</div>
+        <div id="p2-matches" class="lane"></div>
+      </div>
+    </section>
+
+    <!-- CENTER (deck + upcard + status + announcements) -->
+    <main class="center">
+      <div class="deckrow">
+        <div id="deckCount" class="deck-count">Cards remaining in deck: —</div>
+        <div class="deckpair">
+          <img src="cardBack.png" class="card deckback" alt="Deck" />
+          <div id="card-zone" class="card-zone"></div>
         </div>
-        <div id="status" class="status-log"></div>
       </div>
 
-      <div class="player" id="player3">
-        <h2>Bot 2</h2>
-        <div class="hand"></div>
+      <!-- New Orleans-style callouts -->
+      <div id="announcements" class="announcements">
+        <h1 id="callout-main"></h1>
+        <h2 id="callout-sub"></h2>
       </div>
-    </div>
 
-    <div class="player player-bottom" id="player1">
-      <h2>You</h2>
-      <div class="hand"></div>
-    </div>
+      <div id="status" class="status" aria-live="polite"></div>
+
+      <div class="controls">
+        <button id="playBtn" class="btn">Restart Game</button>
+      </div>
+    </main>
+
+    <!-- RIGHT PLAYER (P3) -->
+    <section class="side right">
+      <div class="mini-lane">
+        <div class="lane-title">Discards</div>
+        <div id="p3-discards" class="lane"></div>
+      </div>
+
+      <div class="lane-title">P3</div>
+      <!-- same fan as human, but backs -->
+      <div id="player3" class="hand fan fan-side"></div>
+
+      <div class="mini-lane">
+        <div class="lane-title">Matches</div>
+        <div id="p3-matches" class="lane"></div>
+      </div>
+    </section>
+
+    <!-- YOU (bottom) -->
+    <footer class="bottom">
+      <div class="bottom-lanes">
+        <div>
+          <div class="lane-title">Your Discards</div>
+          <div id="p1-discards" class="lane"></div>
+        </div>
+        <div>
+          <div class="lane-title">Your Matches</div>
+          <div id="p1-matches" class="lane"></div>
+        </div>
+      </div>
+
+      <div class="lane-title youtag">You</div>
+      <div id="player1" class="hand fan my-hand"></div>
+    </footer>
   </div>
 
   <script src="main.js"></script>

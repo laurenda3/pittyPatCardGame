@@ -50,11 +50,11 @@ These rules are subtle but important for an authentic Pitty Pat experience. Rebu
 
 ## 🖼️ Screenshots
 
-### Game Start Page
-![Game UI](images/pittPatwinner.png)
-
 ### Game Play
-![Game Play](images/pittyPatonme1.png)
+![Game UI](images/pittPatonme1.png)
+
+### Winner, Winner!
+![Game Play](images/pittyPatwinner.png)
 
 ## 🛠️ Planned Features
 
